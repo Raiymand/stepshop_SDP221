@@ -1,8 +1,7 @@
 from django.shortcuts import render
 
 
-def index(request):
-    title = "главное"
+def create_context(title):
     links_menu = [
         {'link': 'index', 'name': 'Главное'},
         {'link': 'products:index', 'name': 'Продукты'},
@@ -10,33 +9,34 @@ def index(request):
         {'link': 'contacts', 'name': 'Контакты'}
     ]
     context = {'title': title, 'links_menu': links_menu}
+    return context
 
+
+def index(request):
+    title = "главное"
+    context = create_context(title)
     return render(request, 'index.html', context)
 
 
 def about(request):
     title = "О нас"
-    context = {'title': title}
-
+    context = create_context(title)
     return render(request, 'about.html', context)
 
 
 def contacts(request):
     title = "Связаться с нами"
-    context = {'title': title}
-
+    context = create_context(title)
     return render(request, 'contacts.html', context)
 
 
 def product(request):
     title = "Продукт"
-    context = {'title': title}
-
+    context = create_context(title)
     return render(request, 'product.html', context)
 
 
 def products(request):
     title = "Котолог продуктов"
-    context = {'title': title}
-
+    context = create_context(title)
     return render(request, 'products.html', context)
