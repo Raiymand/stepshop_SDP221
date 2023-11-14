@@ -2,23 +2,24 @@
 {% load static %}
 
 {% block content %}
-<div class="contact-page">
-    <div class="container">
-        <div class="row">
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4 offset-md-4 text-center">
+            <h2 class="mb-4">Редактирование профиля</h2>
 
-            <div class="user_avatar">
-                <img src="/media/{{ user.avatar }}" alt="" class="rounded-circle">
+            <div class="user-avatar">
+                <img src="/media/{{ user.avatar }}" alt="User Avatar" class="rounded-circle img-fluid">
             </div>
         </div>
+    </div>
 
-        <div class="row">
-            <div class="mx-auto col-3">
-                <form id="contact" method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{ edit_form.as_p }}
-                    <button type="submit" class="btn btn-primary my-4">Сохранить изменения</button>
-                </form>
-            </div>
+    <div class="row mt-4">
+        <div class="col-md-6 offset-md-3">
+            <form id="contact" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ edit_form.as_p }}
+                <button type="submit" class="btn btn-primary btn-block mt-4">Сохранить изменения</button>
+            </form>
         </div>
     </div>
 </div>
