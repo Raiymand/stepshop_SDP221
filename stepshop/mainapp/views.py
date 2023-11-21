@@ -45,9 +45,7 @@ def product(request, pk):
 
 
 def products(request, pk=None):
-    title = "Котолог продуктов"
-
-    #_products = Product.objects.all()
+    title = "Каталог продуктов"
     _products = Product.objects.order_by('price')
     context = {}
 
@@ -55,6 +53,7 @@ def products(request, pk=None):
         category = get_object_or_404(Category, pk=pk)
         _products = Product.objects.filter(category__pk=pk).order_by('price')
         context = get_data(category=category)
+        context['selected_category_name'] = category.name  # Добавляем переменную
 
     context = get_data(title=title, prods=_products, **context)
     return render(request, 'products.html', context)
