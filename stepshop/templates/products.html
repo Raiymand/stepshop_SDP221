@@ -1,5 +1,10 @@
 {% extends 'layout/base.html' %}
 {% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static '/assets/css/style.css' %}">
+{% endblock css %}
+
 {% block title %}&mdash;{{ title|capfirst }}{% endblock %}
 {% block content %}
 <!-- Page Content -->
@@ -18,18 +23,7 @@
                     {% endif %}
                 </div>
             </div>
-
-            <div class="col-md-8 col-sm-12">
-                <div id="filters" class="button-group">
-                    {% for category in categories %}
-                    <button class="btn btn-primary">
-                        <a href="{% url 'products:category' category.pk %}">
-                            {{ category.name }}</a>
-                    </button>
-                    {% endfor %}
-
-                </div>
-            </div>
+            {% include 'inc/inc_category_menu.html' %}
         </div>
     </div>
 </div>
