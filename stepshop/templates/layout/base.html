@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="{% static '/assets/css/fontawesome.css' %}">
     <link rel="stylesheet" href="{% static '/assets/css/tooplate-main.css' %}">
     <link rel="stylesheet" href="{% static '/assets/css/owl.css' %}">
+    <link rel="stylesheet" href="{% static '/assets/css/style.css' %}">
     {% block css %}
     <link rel="stylesheet" href="{% static '/assets/css/flex-slider.css' %}">
     {% endblock %}
@@ -36,7 +37,7 @@
 <div id="pre-header">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 blue-menu text-light">
 
                 {% if user.is_authenticated %}
                 <span>
@@ -47,8 +48,14 @@
 
                 {% else %}
                 <span><a href="{% url 'auth:login' %}" class="text-light">Войти</a></span>
-                {% endif %}
+                {% endif %} |
 
+                {% if user.is_authenticated and basket %}
+                    <a href="{% url 'basket:index' %}" class="text-light basket">
+                        <span>{{ basket.0.total_quantity }}</span>
+                    </a>
+                    <span>{{ basket.0.total_cost|floatformat:"0g" }}₸</span>
+                {% endif %}
             </div>
         </div>
     </div>
