@@ -3,7 +3,7 @@ from django.contrib import auth
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
-from mainapp.views import get_data
+from mainapp.views import get_data, get_basket
 from .forms import ShopUserLoginForm, ShopUserRegistererForm, ShopUserEditForm
 
 
@@ -50,6 +50,7 @@ def register(request):
 
 def edit(request):
     title = 'Редактирование'
+    basket = get_basket(request.user)
 
     if request.method == 'POST':
         edit_form = ShopUserEditForm(request.POST, request.FILES, instance=request.user)
@@ -60,7 +61,7 @@ def edit(request):
     else:
         edit_form = ShopUserEditForm(instance=request.user)
 
-    context = get_data(title=title, edit_form=edit_form)
+    context = get_data(title=title, edit_form=edit_form, basket=basket)
 
     return render(request, 'auth/edit.html', context)
 

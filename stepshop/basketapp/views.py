@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 
+from mainapp.views import get_data
 from basketapp.models import Basket
 from mainapp.models import Product
 
@@ -8,9 +9,10 @@ from mainapp.models import Product
 def basket(request):
     if request.user.is_authenticated:
         user_basket = Basket.objects.filter(user=request.user)
-        context = {'basket': user_basket}
+        context = get_data(basket=user_basket)  # Включаем переменные links_menu и categories в контекст
         return render(request, 'basket/basket.html', context)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
 
 
 def basket_add(request, pk):
