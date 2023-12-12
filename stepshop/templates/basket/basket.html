@@ -6,7 +6,7 @@
 {% block content %}
   {% if user.is_authenticated %}
     <div class="container mt-4"> {# Добавлены отступы сверху и снизу #}
-      <div class="row">
+      <div class="row basket_list">
         <table class="table" style="margin-top: 60px;">
           <thead>
             <tr>
@@ -22,7 +22,9 @@
               <tr>
                 <th scope="row">{{ forloop.counter }}</th>
                 <th>{{ item.product }}</th>
-                <th>{{ item.quantity }}</th>
+                <th>
+                  <input type="number" name="{{ item.pk }}" value="{{ item.quantity }}" min="0">
+                </th>
                 <th>{{ item.product_cost }}</th>
                 <th>
                   <a class="btn btn-round"
@@ -32,12 +34,12 @@
             {% endfor %}
           </tbody>
         </table>
-      </div>
-      {% if basket %}
+        {% if basket %}
         <div class="basket_summary mb-5">
           В корзине {{ basket.0.total_quantity }} товаров стоимостью {{ basket.0.total_cost|floatformat:'2g' }} ₸
         </div>
       {% endif %}
+      </div>
     </div>
   {% else %}
     <div class="container mt-4">
@@ -49,4 +51,8 @@
       </div>
     </div>
   {% endif %}
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'assets/js/basket.js' %}"></script>
 {% endblock %}
