@@ -28,8 +28,9 @@ def get_basket(user):
 def index(request):
     title = "главное"
     prods = Product.objects.all()
+    selected_product = Product.objects.first()
     basket = get_basket(request.user)
-    context = get_data(title=title, prods=prods, basket=basket)
+    context = get_data(title=title, prods=prods, basket=basket, selected_product=selected_product)
     return render(request, 'index.html', context)
 
 
